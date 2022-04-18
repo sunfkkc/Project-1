@@ -1,5 +1,24 @@
+:root {
+  --pb-2: #2609ff;
+  --pb-1: #533cff;
+  --p: #806fff;
+  --pl-1: #ada2ff;
+  --pl-2: #dad5ff;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+.header {
+}
+
+.header-title {
+  color: var(--pb-2);
+}
+
+/* .btn {
+  border-radius: 20px;
+}
+ */
