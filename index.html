@@ -5,6 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script
+      src="https://kit.fontawesome.com/fdf596b350.js"
+      crossorigin="anonymous"
+    ></script>
+    <link href="./style.css" rel="stylesheet" />
   </head>
-  <body></body>
+  <body>
+    <div class="header">
+      <div class="header-title">위치 기반 To do List</div>
+    </div>
+    <div class="content">
+      <div class="content-header">
+        <button class="btn content-header--new">작성</button>
+        <button class="btn content-header--find">조회</button>
+        <button class="btn content-header--update">수정</button>
+        <button class="btn content-header--delete">삭제</button>
+      </div>
+      <div class="content-body">
+        <div class="content-body--modal--new">
+          <label class="modal--new__label">할일: </label>
+          <input class="modal--new__input" type="text" id="new-input" />
+          <button class="modal--new__btn--submit">제출</button>
+        </div>
+
+        <div class="content-body__list">
+          <ul class="todoList" id="new_todoList"></ul>
+        </div>
+      </div>
+    </div>
+    <script src="./main.js" type="module"></script>
+  </body>
 </html>
