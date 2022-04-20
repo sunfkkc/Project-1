@@ -1,13 +1,30 @@
 /* get current Position */
+let ListCount = 0;
+
 const position = {
   latitude: 0,
   longitude: 0,
+  LocalName: "",
+  Todo: "",
 };
+
+const geocoder = new kakao.maps.services.Geocoder();
 const GetPositionOk = function (pos) {
   position.latitude = pos.coords.latitude;
   position.longitude = pos.coords.longitude;
-  const newContent = document.getElementById("new-input").value;
-  localStorage.setItem(newContent, JSON.stringify(position));
+  position.Todo = document.getElementById("new-input").value;
+  const callback = function (result, status) {
+    if (status === kakao.maps.services.Status.OK) {
+      position.LocalName = result[0].address_name;
+      localStorage.setItem(ListCount, JSON.stringify(position));
+      ListCount++;
+    }
+  };
+  geocoder.coord2RegionCode(
+    pos.coords.longitude,
+    pos.coords.latitude,
+    callback
+  );
 };
 const NoPosition = function (err) {
   console.log(err);
@@ -21,11 +38,17 @@ const newSubmit = function (e) {
     throw new Error("invalid content");
   }
   const todoList = document.getElementById("new_todoList");
-  navigator.geolocation.getCurrentPosition(GetPositionOk, NoPosition);
   todoList.innerHTML += `<li>${newContent}</li>`;
+  navigator.geolocation.getCurrentPosition(GetPositionOk, NoPosition);
 };
 const newbtnSubmit = document.querySelector(".modal--new__btn--submit");
 newbtnSubmit.addEventListener("click", newSubmit);
 
 /* bring todoList from localstorage */
-console.log(localStorage.key(3));
+
+const todoList = document.getElementById("new_todoList");
+for (let i = 0; i < localStorage.length; i++) {
+  todoList.innerHTML += `<li key=${i}>${
+    JSON.parse(localStorage.getItem(i)).Todo
+  }</li>`;
+}
