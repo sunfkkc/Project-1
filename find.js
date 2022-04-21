@@ -4,10 +4,11 @@ const FindBtn = document.querySelector(".modal--find__btn--submit");
 const HeaderFindBtn = document.querySelector(".content-header--find");
 const todoList = document.getElementById("new_todoList");
 const ContentFind = document.querySelector(".content-body--modal--find");
-
+const ContentNew = document.querySelector(".content-body--modal--new");
 FindBtn.addEventListener("click", FindSubmit);
 HeaderFindBtn.addEventListener("click", (e) => {
   ContentFind.classList.add("show");
+  ContentNew.classList.remove("show");
   todoList.innerHTML = "";
   for (let i = 0; i < localStorage.length; i++) {
     UpdateTodoList(i);
