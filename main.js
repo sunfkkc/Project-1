@@ -1,5 +1,5 @@
 /* get current Position */
-let ListCount = 0;
+let ListCount = localStorage.length;
 
 const position = {
   latitude: 0,
@@ -17,6 +17,7 @@ const GetPositionOk = function (pos) {
     if (status === kakao.maps.services.Status.OK) {
       position.LocalName = result[0].address_name;
       localStorage.setItem(ListCount, JSON.stringify(position));
+      UpdateTodoList(ListCount);
       ListCount++;
     }
   };
@@ -31,24 +32,29 @@ const NoPosition = function (err) {
   throw new Error(err.message);
 };
 
-/* content body modal new */
+/* 작성 버튼 눌렀을 때 */
 const newSubmit = function (e) {
   const newContent = document.getElementById("new-input").value;
   if (!newContent) {
     throw new Error("invalid content");
   }
   const todoList = document.getElementById("new_todoList");
-  todoList.innerHTML += `<li>${newContent}</li>`;
-  navigator.geolocation.getCurrentPosition(GetPositionOk, NoPosition);
+  navigator.geolocation.getCurrentPosition(
+    GetPositionOk,
+    NoPosition
+  ); /* 현재 위치를 불러오는데 시간이 걸려서 바로 리스트에 등록이 안됨 프로미스를 써서 해결해 볼수 있을까..*/
 };
 const newbtnSubmit = document.querySelector(".modal--new__btn--submit");
 newbtnSubmit.addEventListener("click", newSubmit);
 
 /* bring todoList from localstorage */
-
+export function UpdateTodoList(index) {
+  const todoList = document.getElementById("new_todoList");
+  todoList.innerHTML += `<li key=${index}>${
+    JSON.parse(localStorage.getItem(index)).Todo
+  } - ${JSON.parse(localStorage.getItem(index)).LocalName}</li>`;
+}
 const todoList = document.getElementById("new_todoList");
 for (let i = 0; i < localStorage.length; i++) {
-  todoList.innerHTML += `<li key=${i}>${
-    JSON.parse(localStorage.getItem(i)).Todo
-  }</li>`;
+  UpdateTodoList(i);
 }
