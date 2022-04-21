@@ -10,22 +10,23 @@ NewBtn.addEventListener("click", () => {
 /* get current Position */
 let ListCount = localStorage.length;
 
-const position = {
+const Data = {
   latitude: 0,
   longitude: 0,
   LocalName: "",
   Todo: "",
+  done: false,
 };
 
 const geocoder = new kakao.maps.services.Geocoder();
 const GetPositionOk = function (pos) {
-  position.latitude = pos.coords.latitude;
-  position.longitude = pos.coords.longitude;
-  position.Todo = document.getElementById("new-input").value;
+  Data.latitude = pos.coords.latitude;
+  Data.longitude = pos.coords.longitude;
+  Data.Todo = document.getElementById("new-input").value;
   const callback = function (result, status) {
     if (status === kakao.maps.services.Status.OK) {
-      position.LocalName = result[0].address_name;
-      localStorage.setItem(ListCount, JSON.stringify(position));
+      Data.LocalName = result[0].address_name;
+      localStorage.setItem(ListCount, JSON.stringify(Data));
       UpdateTodoList(ListCount);
       ListCount++;
     }
@@ -59,11 +60,16 @@ newbtnSubmit.addEventListener("click", newSubmit);
 /* bring todoList from localstorage */
 export function UpdateTodoList(index) {
   const todoList = document.getElementById("new_todoList");
-  todoList.innerHTML += `<li key=${index}>${
+  todoList.innerHTML += `<li key=${index} class=TodoList${index}>${
     JSON.parse(localStorage.getItem(index)).Todo
-  } - ${JSON.parse(localStorage.getItem(index)).LocalName}</li>`;
+  } - ${JSON.parse(localStorage.getItem(index)).LocalName} 
+  <span> <input type="checkbox" class=TodoListChk${index}></span>
+  </li>`;
 }
 const todoList = document.getElementById("new_todoList");
 for (let i = 0; i < localStorage.length; i++) {
   UpdateTodoList(i);
 }
+
+/*  체크박스 눌렀을 때 done 처리*/
+const DoneTodoList = document.querySelector(".TodoList");
