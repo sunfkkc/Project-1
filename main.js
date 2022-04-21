@@ -1,3 +1,12 @@
+/*  */
+const NewBtn = document.querySelector(".content-header--new");
+const ContentFind = document.querySelector(".content-body--modal--find");
+const ContentNew = document.querySelector(".content-body--modal--new");
+NewBtn.addEventListener("click", () => {
+  ContentFind.classList.remove("show");
+  ContentNew.classList.add("show");
+});
+
 /* get current Position */
 let ListCount = localStorage.length;
 
