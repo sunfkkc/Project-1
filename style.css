@@ -23,17 +23,13 @@
 }
  */
 
-.content-body--modal--new {
-  display: none;
-}
-
 .content-body--modal--find {
   display: none;
 }
 
-.show {
-  display: block;
-}
 .hidden {
   display: none;
+}
+i:hover {
+  cursor: pointer;
 }
