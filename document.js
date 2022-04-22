@@ -8,11 +8,13 @@ const headerNewBtn = document.querySelector(".content-header--new");
 const newBtn = document.querySelector(".modal--new__btn--submit");
 const headerFindBtn = document.querySelector(".content-header--find");
 const findBtn = document.querySelector(".modal--find__btn--submit");
+const deleteBtn = document.querySelector(".fa-trash");
 
 /* eventListner */
 headerNewBtn.addEventListener("click", () => {
-  $contentFind.classList.remove("show");
-  $contentNew.classList.add("show");
+  //$contentFind.classList.add("hidden");
+  $contentNew.classList.remove("hidden");
+  $todoList.classList.add("hidden");
 });
 /* input */
 const newTodo = document.querySelector(".modal--new__input");
@@ -28,4 +30,5 @@ export {
   findBtn,
   newTodo,
   findTodo,
+  deleteBtn,
 };
