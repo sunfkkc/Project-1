@@ -1,7 +1,7 @@
 /* element */
 const $contentFind = document.querySelector(".content-body--modal--find");
 const $contentNew = document.querySelector(".content-body--modal--new");
-const $todoList = document.querySelector(".todoList");
+const $todoList = document.querySelector(".todolist");
 
 /* btn */
 const headerNewBtn = document.querySelector(".content-header--new");
@@ -12,13 +12,22 @@ const deleteBtn = document.querySelector(".fa-trash");
 
 /* eventListner */
 headerNewBtn.addEventListener("click", () => {
-  //$contentFind.classList.add("hidden");
   $contentNew.classList.remove("hidden");
   $todoList.classList.add("hidden");
+  //$todoList.classList.add("hidden");
+});
+headerFindBtn.addEventListener("click", () => {
+  $contentNew.classList.add("hidden");
+  $todoList.classList.remove("hidden");
 });
 /* input */
 const newTodo = document.querySelector(".modal--new__input");
 const findTodo = document.querySelector(".modal--find__input");
+
+/*isLoading */
+const loadingLabel = document.createElement("label");
+const loadingText = document.createTextNode("Loading...");
+loadingLabel.appendChild(loadingText);
 
 export {
   $contentFind,
@@ -31,4 +40,5 @@ export {
   newTodo,
   findTodo,
   deleteBtn,
+  loadingLabel,
 };
