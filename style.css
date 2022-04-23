@@ -22,7 +22,9 @@
   border-radius: 20px;
 }
  */
-
+.content-body__list {
+  display: block;
+}
 .content-body--modal--find {
   display: none;
 }
