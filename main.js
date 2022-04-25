@@ -19,7 +19,8 @@ const addTodo = function () {
   /* 제출 후 로컬 스토리지 저장 */
   const newContent = doc.newTodo.value;
   if (!newContent || !doc.newTodo) {
-    throw new Error("invalid content");
+    //throw new Error("invalid content");
+    return alert("할 일을 입력해 주세요!");
   }
   doc.newBtn.classList.add("hidden");
   doc.newTodo.readOnly = true;
@@ -39,6 +40,7 @@ const addTodo = function () {
       doc.$contentNew.removeChild(doc.loadingLabel);
       doc.newBtn.classList.remove("hidden");
       doc.newTodo.readOnly = false;
+      doc.newTodo.value = "";
       asyncInsertTodoList(todoList);
     })
     .catch((err) => {
