@@ -19,20 +19,24 @@
       <div class="content-header">
         <button class="btn content-header--new">작성</button>
         <button class="btn content-header--find">조회</button>
-        <button class="btn content-header--update">수정</button>
-        <button class="btn content-header--delete">삭제</button>
+        <!--<button class="btn content-header--update">수정</button>
+        <button class="btn content-header--delete">삭제</button>-->
       </div>
       <div class="content-body">
         <div class="content-body--modal--new">
-          <label class="modal--new__label">할일: </label>
-          <input class="modal--new__input" type="text" />
-          <button class="modal--new__btn--submit">제출</button>
+          <!--<label class="modal--new__label">할일: </label>-->
+          <input
+            class="modal--new__input"
+            type="text"
+            placeholder="할 일을 입력해 주세요"
+          />
+          <button class="btn modal--new__btn--submit">제출</button>
         </div>
-        <div class="content-body--modal--find">
+        <!--<div class="content-body--modal--find">
           <label class="modal--find__label">할일: </label>
           <input class="modal--find__input" type="text" />
           <button class="modal--find__btn--submit">조회</button>
-        </div>
+        </div>-->
 
         <div class="content-body__list">
           <ul class="todolist hidden"></ul>
@@ -44,7 +48,6 @@
       src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c2506e10b582c4b8169592cd7cbc936d&libraries=services"
     ></script>
     <script src="./main.js" type="module"></script>
-    <script src="./find.js" type="module"></script>
     <script src="./document.js" type="module"></script>
   </body>
 </html>
