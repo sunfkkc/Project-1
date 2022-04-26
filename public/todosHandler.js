@@ -1,17 +1,19 @@
 import * as doc from "./document.js";
-import { makeDeleteIcon } from "./getDeleteIcon.js";
-import { makeCheckBox } from "./getChkBox.js";
-import { makeChangeIcon } from "./change.js";
+import { makeDeleteIcon, makeCheckBox, makeChangeIcon } from "./getIcons.js";
 import { Database } from "./database.js";
 import { getReverseGeocoding } from "./util.js";
+
 let todos = [];
+
 export function loadTodos() {
   todos = Database.load();
 }
+
 function saveTodos() {
   Database.save(todos);
   makeTodoList();
 }
+
 export const makeTodoList = async function () {
   doc.$todoList.innerHTML = "";
 
@@ -45,12 +47,14 @@ function isLoading() {
   doc.newTodo.readOnly = true;
   doc.$contentNew.appendChild(doc.loadingLabel);
 }
+
 function endLoading() {
   doc.$contentNew.removeChild(doc.loadingLabel);
   doc.newBtn.classList.remove("hidden");
   doc.newTodo.readOnly = false;
   doc.newTodo.value = "";
 }
+
 const addTodo = async function () {
   const newContent = doc.newTodo.value;
   if (!newContent || !doc.newTodo) {
@@ -124,6 +128,7 @@ function inputEnterKey(e) {
     confirmChange1();
   }
 }
+
 function confirmChange1(e) {
   const changeTitleBox = document.querySelector(".changeTitle");
   todos[parseInt(changeTitleBox.id)].title = changeTitleBox.value;
