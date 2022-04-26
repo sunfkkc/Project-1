@@ -1,3 +1,4 @@
+import { Database } from "./database.js";
 import { asyncInsertTodoList } from "./insertTodoList.js";
 
 export const makeDeleteIcon = function (item) {
@@ -8,7 +9,7 @@ export const makeDeleteIcon = function (item) {
   return deleteIcon;
 };
 const deleteTodo = function (e) {
-  const beforeDeletTodoList = JSON.parse(localStorage.getItem("todo"));
+  const beforeDeletTodoList = Database.load(); //JSON.parse(localStorage.getItem("todo"));
   const deletedTodoList = beforeDeletTodoList.filter(
     (item) => item.id !== parseInt(e.target.id)
   );
@@ -16,6 +17,7 @@ const deleteTodo = function (e) {
     deletedTodoList[i].id = i;
   }
   localStorage.clear();
-  localStorage.setItem("todo", JSON.stringify(deletedTodoList));
+  //localStorage.setItem("todo", JSON.stringify(deletedTodoList));
+  Database.save(deletedTodoList);
   asyncInsertTodoList(deletedTodoList);
 };

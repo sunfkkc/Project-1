@@ -1,3 +1,4 @@
+import { Database } from "./database";
 export const makeChangeIcon = function (item) {
   const changeIcon = document.createElement("i");
   changeIcon.setAttribute("class", "fas fa-solid fa-pen");
@@ -43,10 +44,11 @@ function confirmChange(e) {
   const todoTitle = document.querySelector(
     `#title${parseInt(changeTitleBox.id)}`
   );
-  const todoList = JSON.parse(localStorage.getItem("todo"));
+  const todoList = Database.load();
   todoList[parseInt(changeTitleBox.id)].title = changeTitleBox.value;
   localStorage.clear();
-  localStorage.setItem("todo", JSON.stringify(todoList));
+  //localStorage.setItem("todo", JSON.stringify(todoList));
+  Database.save(todoList);
   const changeTitle = document.createTextNode(changeTitleBox.value);
   todoTitle.appendChild(changeTitle);
   todoTitle.removeChild(changeTitleBox);

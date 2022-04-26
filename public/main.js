@@ -1,11 +1,13 @@
+import { Database } from "./database.js";
 import * as doc from "./document.js";
 import { asyncInsertTodoList } from "./insertTodoList.js";
 
 /* 새로고침 할때 투두리스트 불러오기 */
 if (localStorage.length === 0) {
-  localStorage.setItem("todo", JSON.stringify([]));
+  //localStorage.setItem("todo", JSON.stringify([]));
+  Database.save([]);
 } else {
-  asyncInsertTodoList(JSON.parse(localStorage.getItem("todo")));
+  asyncInsertTodoList(Database.load());
 }
 
 /* get 위도 경도 */
@@ -28,15 +30,16 @@ const addTodo = function () {
   getPosition()
     .then((pos) => {
       const todo = {
-        id: JSON.parse(localStorage.getItem("todo")).length,
+        id: Database.load().length,
         title: doc.newTodo.value,
         longitude: pos.coords.longitude,
         latitude: pos.coords.latitude,
         done: false,
       };
-      const todoList = JSON.parse(localStorage.getItem("todo"));
+      const todoList = Database.load();
       todoList.push(todo);
-      localStorage.setItem("todo", JSON.stringify(todoList));
+      //localStorage.setItem("todo", JSON.stringify(todoList));
+      Database.save(todoList);
       doc.$contentNew.removeChild(doc.loadingLabel);
       doc.newBtn.classList.remove("hidden");
       doc.newTodo.readOnly = false;

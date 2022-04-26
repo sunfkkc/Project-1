@@ -1,3 +1,5 @@
+import { Database } from "./database";
+import { newTodo } from "./document";
 export const makeCheckBox = function (item) {
   const chkBox = document.createElement("input");
   chkBox.type = "checkbox";
@@ -9,7 +11,7 @@ export const makeCheckBox = function (item) {
   return chkBox;
 };
 function onClickChkBox(e) {
-  const todoList = JSON.parse(localStorage.getItem("todo"));
+  const todoList = Database.load();
   let newTodoList = [];
   todoList.map((item) => {
     if (item.id == parseInt(e.target.id)) {
@@ -18,5 +20,6 @@ function onClickChkBox(e) {
     newTodoList.push(item);
   });
   localStorage.clear();
-  localStorage.setItem("todo", JSON.stringify(newTodoList));
+  //localStorage.setItem("todo", JSON.stringify(newTodoList));
+  Database.save(newTodoList);
 }
