@@ -1,8 +1,8 @@
-import { Database } from "./database.js";
-import { makeTodoList } from "./insertTodoList.js";
+import { loadTodos, makeTodoList } from "./todosHandler.js";
 
 function main() {
-  makeTodoList(todos);
+  loadTodos();
+  makeTodoList();
 }
 
 main();
