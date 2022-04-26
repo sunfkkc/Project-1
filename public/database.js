@@ -1,4 +1,4 @@
-const TODOS_KEY = "todos";
+const TODOS_KEY = "todo";
 
 export class Database {
   static load() {
