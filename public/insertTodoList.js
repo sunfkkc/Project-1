@@ -24,6 +24,7 @@ export const makeTodoList = async function () {
     todo.appendChild(todoTitle);
 
     const chkBox = makeCheckBox(item);
+    chkBox.onclick = onClickChkBox;
     const deleteIcon = makeDeleteIcon(item);
     deleteIcon.onclick = deleteTodo;
     const changeIcon = makeChangeIcon(item);
@@ -76,3 +77,14 @@ const deleteTodo = function (e) {
   }
   saveTodos();
 };
+
+//onClick checkBox
+function onClickChkBox(e) {
+  todos.map((item) => {
+    if (item.id === parseInt(e.target.id)) {
+      item.done = !item.done;
+    }
+  });
+  saveTodos();
+}
+//change todo
